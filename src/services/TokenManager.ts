@@ -10,8 +10,8 @@ export enum USER_ROLES {
 
 export interface TokenPayload {
     id: string,
-    name: string,
-    role: USER_ROLES
+    apelido: string,
+    // role: USER_ROLES
 } // realocar para o arquivo da entidade User
 
 export class TokenManager {
