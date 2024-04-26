@@ -12,4 +12,4 @@ export interface LoginOutputDTO {
 export const LoginSchema = z.object({
     email: z.string().email(),
     senha: z.string().min(4)
-})
+}).transform(data => data as LoginInputDTO)

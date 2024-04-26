@@ -1,12 +1,13 @@
+-- Active: 1704838791198@@127.0.0.1@3306
 CREATE TABLE users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     apelido TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
+    senha TEXT NOT NULL,
     created_at TEXT DEFAULT (DATETIME()) NOT NULL
 )
 
-INSERT INTO users (id, apelido, email, password)
+INSERT INTO users (id, apelido, email, senha)
 VALUES
     ('u001','Fulano','fulano@email.com','fulano123'),
     ('u002','Ciclana','ciclana@email.com','ciclana123'),
@@ -14,7 +15,7 @@ VALUES
 
 CREATE TABLE posts (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    creator_id TEXT UNIQUE NOT NULL,
+    creator_id TEXT NOT NULL,
     conteúdo TEXT NOT NULL,
     downvote INTEGER DEFAULT (0) NOT NULL,
     upvote INTEGER DEFAULT (0) NOT NULL,
@@ -36,7 +37,7 @@ VALUES
 
 CREATE TABLE comments(
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    post_id TEXT UNIQUE NOT NULL,
+    post_id TEXT NOT NULL,
     commenter_id TEXT NOT NULL,
     conteúdo TEXT NOT NULL,
     downvote INTEGER DEFAULT (0) NOT NULL,
@@ -61,8 +62,7 @@ VALUES
 CREATE TABLE upvote_downvote_post (
     voter_id TEXT NOT NULL,
     post_id TEXT NOT NULL,
-    upvote INTEGER NOT NULL,
-    downvote INTEGER NOT NULL,
+    direction INTEGER NOT NULL,
     FOREIGN KEY (voter_id) REFERENCES users (id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
@@ -85,7 +85,7 @@ CREATE TABLE upvote_downvote_comment (
 );
 
 
-INSERT INTO upvote_downvote_post (voter_id, post_id, upvote)
+INSERT INTO upvote_downvote_post (voter_id, post_id, direction)
 VALUES
     ('u001','p002', 1),
     ('u002','p001', 1),

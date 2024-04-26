@@ -4,9 +4,21 @@ export interface PostDB {
     conteúdo: string,
     downvote: number,
     upvote: number,
-    comments: string,
+    comments: number,
     created_at: string,
     updated_at: string,
+}
+
+export interface PostDBWithCreatorNickname {
+    id: string,
+    creator_id: string,
+    conteúdo: string,
+    downvote: number,
+    upvote: number,
+    comments: number,
+    created_at: string,
+    updated_at: string,
+    apelido: string
 }
 
 export interface PostModel {
@@ -14,13 +26,24 @@ export interface PostModel {
     conteúdo: string,
     downvote: number,
     upvote: number,
-    comments: string,
+    comments: number,
     createdAt: string,
     updatedAt: string,
     creator: {
         id: string,
         apelido: string
     },
+}
+
+export interface UpvoteDownvoteDB{
+    voter_id: string,
+    post_id: string,
+    direction: number
+} 
+
+export enum POST_UPVOTE {
+    ALREADY_UPVOTED = "ALREADY UPVOTED",
+    ALREADY_DOWNVOTED = "ALREADY DOWNVOTED"
 }
 
 export class Post {
@@ -31,7 +54,7 @@ export class Post {
         private conteúdo: string,
         private downvote: number,
         private upvote: number,
-        private comments: string,
+        private comments: number,
         private createdAt: string,
         private updatedAt: string,
     ) { }
@@ -84,11 +107,27 @@ export class Post {
         this.upvote = value
     }
 
-    public getComments(): string {
+    public addUpvote(): void {
+        this.upvote++
+    }
+
+    public removeUpvote(): void {
+        this.upvote--
+    }
+
+    public addDownvote(): void {
+        this.downvote++
+    }
+
+    public removeDownvote(): void {
+        this.downvote--
+    }
+
+    public getComments(): number {
         return this.comments
     }
 
-    public setComments(value: string): void {
+    public setComments(value: number): void {
         this.comments = value
     }
 
@@ -119,6 +158,8 @@ export class Post {
             created_at: this.createdAt,
             updated_at: this.updatedAt,
         }
+
+    
     }
     public toBusinessModel(): PostModel {
         return {

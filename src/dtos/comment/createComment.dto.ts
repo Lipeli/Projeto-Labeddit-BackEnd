@@ -1,12 +1,12 @@
 import z from 'zod'
 
-export interface CreatePostInputDTO {
+export interface CreateCommentInputDTO {
     conteudo: string,
     token: string
 }
-export type CreatePostOutputDTO = undefined
+export type CreateCommentOutputDTO = undefined
 
-export const CreatePostSchema = z.object({
+export const CreateCommenttSchema = z.object({
     conteudo: z.string().min(1),
     token: z.string().min(1)
 })
