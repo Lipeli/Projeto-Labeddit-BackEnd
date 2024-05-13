@@ -30,7 +30,7 @@ CREATE TABLE posts (
 INSERT INTO posts(id, creator_id, conteúdo)
 VALUES
     ('p001','u001','Olá, meu nome é Fulano'),
-    ('p002','u002','Olá, meu nome é não é Beltrana'),
+    ('p002','u002','Olá, meu nome não é Beltrana'),
     ('p003','u003','Olá, essa gente é estranha');
 
 
