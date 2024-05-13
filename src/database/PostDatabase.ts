@@ -18,7 +18,7 @@ export class PostDatabase extends BaseDatabase {
             .connection(PostDatabase.TABLE_POSTS)
             .select(
                 `${PostDatabase.TABLE_POSTS}.id`,
-                `${UserDatabase.TABLE_USERS}.id`,
+                // `${UserDatabase.TABLE_USERS}.id`,
                 `${UserDatabase.TABLE_USERS}.apelido`,
                 `${PostDatabase.TABLE_POSTS}.creator_id`,
                 `${PostDatabase.TABLE_POSTS}.conteúdo`,
